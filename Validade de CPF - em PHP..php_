@@ -1,0 +1,117 @@
+<?PHP
+//$cpf = $_GET['cpf'];
+//VALIDADOR DO CPFFF
+     function validacpf($cpf = null) {
+
+      // Verifica se um número foi informado
+      if(empty($cpf)) {
+         
+         return false;
+      }
+   
+      // Elimina possivel mascara
+      $cpf = preg_replace("/[^0-9]/", "", $cpf);
+      $cpf = str_pad($cpf, 11, '0', STR_PAD_LEFT);
+      
+      // Verifica se o numero de digitos informados é igual a 11 
+      if (strlen($cpf) != 11) {
+         
+         return false;
+      }
+      // Verifica se nenhuma das sequências invalidas abaixo 
+      // foi digitada. Caso afirmativo, retorna falso
+      else if ($cpf == '00000000000' || 
+         $cpf == '11111111111' || 
+         $cpf == '22222222222' || 
+         $cpf == '33333333333' || 
+         $cpf == '44444444444' || 
+         $cpf == '55555555555' || 
+         $cpf == '66666666666' || 
+         $cpf == '77777777777' || 
+         $cpf == '88888888888' || 
+         $cpf == '99999999999') {
+          
+         return false;
+       // Calcula os digitos verificadores para verificar se o
+       // CPF é válido
+       } else {   
+         
+         for ($t = 9; $t < 11; $t++) {
+            
+            for ($d = 0, $c = 0; $c < $t; $c++) {
+               $d += $cpf{$c} * (($t + 1) - $c);
+            }
+            $d = ((10 * $d) % 11) % 10;
+            if ($cpf{$c} != $d) {
+              
+               return false;
+            }
+         }
+   
+         return true;
+      }
+   }
+
+   //REMOVEDOR DE ASPAS//
+
+   function removeaspas($texto)
+   {
+      if(is_array($texto)){
+        $max = count($texto);
+
+        for($c=0;$c<$max;$c++);
+        {
+        return str_replace("'"," ", $texto);
+
+        }
+      } else {
+        return str_replace("'"," ",$texto);
+
+      }
+   }
+
+   function data($m)
+   $m = date('m')
+     if ($m == 1) return "janeiro";
+     if ($m == 2) return "fevereiro";
+     if ($m == 3) return "março";
+     if ($m == 4) return "abril";
+     if ($m == 5) return "maio";
+     if ($m == 6) return "junho";
+     if ($m == 7) return "julho";
+     if ($m == 8) return "agosto";
+     if ($m == 9) return "setembro";
+     if ($m == 10) return "outubro";
+     if ($m == 11) return "novembro";
+     if ($m == 1) return "dezembro";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+?>
